@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle, Search, Compass, Terminal, ShieldAlert, Rocket } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle,
+  Search,
+  Compass,
+  Terminal,
+  ShieldAlert,
+  Rocket,
+} from 'lucide-react';
+
 import { ApproachStep } from '../../types';
 import { ApproachModel3D } from '../canvas/ApproachModel3D';
 
@@ -16,7 +25,11 @@ export const approachSteps: ApproachStep[] = [
       'Data Entity & Relationship Models',
       'Security & Compliance Requirements',
     ],
-    keyPractices: ['Stakeholder discovery sessions', 'Risk-first scoping', 'Clear acceptance criteria'],
+    keyPractices: [
+      'Stakeholder discovery sessions',
+      'Risk-first scoping',
+      'Clear acceptance criteria',
+    ],
   },
   {
     step: '02',
@@ -30,7 +43,11 @@ export const approachSteps: ApproachStep[] = [
       'API Contract Specifications (OpenAPI / GraphQL)',
       'Database Schema Migration Scripts',
     ],
-    keyPractices: ['WCAG AA compliance', 'Atomic component design', 'Zero-pill metadata discipline'],
+    keyPractices: [
+      'WCAG AA compliance',
+      'Atomic component design',
+      'Zero-pill metadata discipline',
+    ],
   },
   {
     step: '03',
@@ -44,7 +61,11 @@ export const approachSteps: ApproachStep[] = [
       'Secure Authentication & Authorization (RBAC)',
       'Third-Party Enterprise API Connectors',
     ],
-    keyPractices: ['Strict TypeScript typing', 'Clean architecture separation', 'Git-flow code reviews'],
+    keyPractices: [
+      'Strict TypeScript typing',
+      'Clean architecture separation',
+      'Git-flow code reviews',
+    ],
   },
   {
     step: '04',
@@ -58,7 +79,11 @@ export const approachSteps: ApproachStep[] = [
       'Cross-Device & Cross-Browser Verification',
       'User Acceptance Testing Sign-off',
     ],
-    keyPractices: ['Automated test suites', 'Lighthouse 95+ performance targets', 'Penetration screening'],
+    keyPractices: [
+      'Automated test suites',
+      'Lighthouse 95+ performance targets',
+      'Penetration screening',
+    ],
   },
   {
     step: '05',
@@ -72,7 +97,11 @@ export const approachSteps: ApproachStep[] = [
       'Real-Time System Health Monitoring & Alerts',
       'Long-Term Maintenance SLA Agreement',
     ],
-    keyPractices: ['Zero-downtime blue/green releases', 'Proactive log aggregation', 'Dedicated support channels'],
+    keyPractices: [
+      'Zero-downtime blue/green releases',
+      'Proactive log aggregation',
+      'Dedicated support channels',
+    ],
   },
 ];
 
@@ -81,101 +110,152 @@ export const ApproachSection: React.FC = () => {
   const currentStep = approachSteps[activeStepIndex];
 
   const getStepIcon = (index: number) => {
+    const iconClass = 'h-5 w-5 text-sky-700 dark:text-sky-400';
+
     switch (index) {
       case 0:
-        return <Search className="w-5 h-5 text-sky-500" />;
+        return <Search className={iconClass} />;
       case 1:
-        return <Compass className="w-5 h-5 text-sky-500" />;
+        return <Compass className={iconClass} />;
       case 2:
-        return <Terminal className="w-5 h-5 text-sky-500" />;
+        return <Terminal className={iconClass} />;
       case 3:
-        return <ShieldAlert className="w-5 h-5 text-sky-500" />;
+        return <ShieldAlert className={iconClass} />;
       case 4:
       default:
-        return <Rocket className="w-5 h-5 text-sky-500" />;
+        return <Rocket className={iconClass} />;
     }
   };
 
+  const goToPreviousStep = () => {
+    setActiveStepIndex((prev) =>
+      prev > 0 ? prev - 1 : approachSteps.length - 1
+    );
+  };
+
+  const goToNextStep = () => {
+    setActiveStepIndex((prev) =>
+      prev < approachSteps.length - 1 ? prev + 1 : 0
+    );
+  };
+
   return (
-    <section id="approach" className="relative py-32 px-6 max-w-7xl mx-auto z-10 pointer-events-none">
+    <section
+      id="approach"
+      className="relative z-10 mx-auto max-w-7xl px-6 py-32 pointer-events-none"
+    >
       <div className="pointer-events-auto">
+
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 text-xs font-mono tracking-wider text-sky-600 dark:text-sky-400 mb-4 uppercase">
+        <div className="relative z-20 mb-16 max-w-3xl rounded-2xl bg-white/80 px-3 py-5 backdrop-blur-[3px] sm:px-5 sm:py-6 dark:bg-transparent dark:backdrop-blur-none">
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-800 dark:text-sky-400">
             <span>03</span>
             <span aria-hidden="true">·</span>
             <span>Delivery Methodology</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-6 text-balance">
+          <h2 className="mb-6 text-3xl font-extrabold leading-[1.15] tracking-tight text-slate-950 text-balance sm:text-5xl dark:text-white">
             A disciplined engineering lifecycle from concept to deployment.
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed text-balance">
-            Software projects succeed through predictable milestones and transparent collaboration. Here is how Estivoxx Technologies turns complex briefs into dependable digital products.
+          <p className="text-base font-medium leading-relaxed text-slate-800 text-balance sm:text-lg dark:text-slate-300">
+            Software projects succeed through predictable milestones and
+            transparent collaboration. Here is how Estivoxx Technologies turns
+            complex briefs into dependable digital products.
           </p>
         </div>
 
-        {/* Step Selector Ribbon */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-10">
+        {/* Five-Stage Selector */}
+        <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-5">
           {approachSteps.map((step, idx) => {
             const isActive = activeStepIndex === idx;
+
             return (
               <button
                 key={step.step}
+                type="button"
                 onClick={() => setActiveStepIndex(idx)}
-                className={`p-4 rounded-xl border text-left transition-all ${
-                  isActive
-                    ? 'bg-slate-900 text-white dark:bg-sky-600 dark:text-white border-transparent shadow-md'
-                    : 'bg-white/70 dark:bg-slate-900/60 border-slate-200/80 dark:border-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-900'
-                }`}
+                aria-pressed={isActive}
+                className={`
+                  rounded-xl border p-4 text-left transition-all duration-200
+                  focus-visible:outline-none focus-visible:ring-2
+                  focus-visible:ring-sky-500 focus-visible:ring-offset-2
+                  dark:focus-visible:ring-offset-slate-950
+                  ${
+                    isActive
+                      ? 'border-slate-950 bg-slate-950 text-white shadow-md dark:border-sky-500 dark:bg-sky-600'
+                      : 'border-slate-300 bg-white/90 text-slate-800 hover:border-sky-400 hover:bg-white dark:border-slate-800/80 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:bg-slate-900'
+                  }
+                `}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-xs font-mono font-bold ${isActive ? 'text-sky-300' : 'text-sky-600 dark:text-sky-400'}`}>
+                <div className="mb-2 flex items-center justify-between">
+                  <span
+                    className={`font-mono text-xs font-bold ${
+                      isActive
+                        ? 'text-sky-300'
+                        : 'text-sky-800 dark:text-sky-400'
+                    }`}
+                  >
                     {step.step}
                   </span>
-                  {isActive && <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
+
+                  {isActive && (
+                    <span
+                      className="h-1.5 w-1.5 animate-pulse rounded-full bg-white"
+                      aria-hidden="true"
+                    />
+                  )}
                 </div>
-                <div className="text-xs font-semibold truncate">{step.title}</div>
+
+                <div className="text-xs font-bold leading-relaxed">
+                  {step.title}
+                </div>
               </button>
             );
           })}
         </div>
 
-        {/* Selected Stage Detail Display */}
-        <div className="p-8 sm:p-10 rounded-2xl bg-white/85 dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800/90 backdrop-blur-md shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 rounded-lg bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800">
+        {/* Selected Stage Details */}
+        <div className="rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-xl backdrop-blur-md sm:p-10 dark:border-slate-800/90 dark:bg-slate-900/85">
+          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+
+            {/* Left Column: Stage Information */}
+            <div className="space-y-6 lg:col-span-7">
+              <div className="flex items-start gap-3">
+                <div className="shrink-0 rounded-lg border border-sky-200 bg-sky-50 p-3 dark:border-sky-800 dark:bg-sky-950/50">
                   {getStepIcon(activeStepIndex)}
                 </div>
-                <div>
-                  <span className="text-xs font-mono text-sky-600 dark:text-sky-400 uppercase tracking-wider block">
+
+                <div className="min-w-0">
+                  <span className="mb-1 block text-xs font-mono uppercase tracking-wider text-sky-800 dark:text-sky-400">
                     Stage {currentStep.step} of 05
                   </span>
-                  <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+
+                  <h3 className="text-2xl font-extrabold leading-snug text-slate-950 dark:text-white">
                     {currentStep.title}
                   </h3>
-                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5">
+
+                  <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-700 dark:text-slate-400">
                     {currentStep.subtitle}
                   </p>
                 </div>
               </div>
 
-              <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-base font-medium leading-relaxed text-slate-800 dark:text-slate-300">
                 {currentStep.description}
               </p>
 
+              {/* Key Practices */}
               <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                <h4 className="mb-3 text-xs font-mono font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-400">
                   Key Practices
                 </h4>
+
                 <div className="flex flex-wrap gap-2">
-                  {currentStep.keyPractices.map((practice, i) => (
+                  {currentStep.keyPractices.map((practice) => (
                     <span
-                      key={i}
-                      className="text-xs font-medium px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+                      key={practice}
+                      className="rounded-md border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
                     >
                       {practice}
                     </span>
@@ -184,61 +264,82 @@ export const ApproachSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-5 space-y-4">
-              {/* Dedicated 3D Stage Visual Geometry */}
+            {/* Right Column: 3D Stage & Deliverables */}
+            <div className="space-y-4 lg:col-span-5">
+
+              {/* Interactive 3D Stage Model */}
               <ApproachModel3D stageIndex={activeStepIndex} />
 
-              <div className="p-6 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              {/* Deliverables Card */}
+              <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-6 dark:border-slate-800/80 dark:bg-slate-950/70">
+                <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-400">
                   Verified Deliverables
                 </h4>
+
                 <div className="space-y-3">
-                  {currentStep.deliverables.map((deliv, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs text-slate-800 dark:text-slate-200">
-                      <CheckCircle className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
-                      <span>{deliv}</span>
+                  {currentStep.deliverables.map((deliverable) => (
+                    <div
+                      key={deliverable}
+                      className="flex items-start gap-2.5 text-xs font-medium leading-relaxed text-slate-800 dark:text-slate-200"
+                    >
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-sky-700 dark:text-sky-400" />
+                      <span>{deliverable}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                  <span className="text-xs text-slate-500">Milestone Verification</span>
-                  <span className="text-xs font-mono text-sky-600 dark:text-sky-400 font-semibold">
-                    Client Signed Off
+                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-300 pt-4 dark:border-slate-800">
+                  <span className="text-xs font-medium text-slate-700 dark:text-slate-400">
+                    Milestone Verification
+                  </span>
+
+                  <span className="text-xs font-mono font-semibold text-sky-800 dark:text-sky-400">
+                    Client Sign-off
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="pt-8 mt-8 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between">
+          {/* Stage Navigation */}
+          <div className="mt-8 flex items-center justify-between gap-3 border-t border-slate-300 pt-8 dark:border-slate-800/80">
             <button
-              onClick={() => setActiveStepIndex((prev) => (prev > 0 ? prev - 1 : approachSteps.length - 1))}
-              className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              type="button"
+              onClick={goToPreviousStep}
+              className="text-xs font-semibold text-slate-700 transition-colors hover:text-slate-950 dark:text-slate-400 dark:hover:text-white"
             >
               ← Previous Phase
             </button>
 
             <div className="flex items-center gap-1.5">
-              {approachSteps.map((_, i) => (
+              {approachSteps.map((step, idx) => (
                 <button
-                  key={i}
-                  onClick={() => setActiveStepIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === activeStepIndex ? 'w-6 bg-sky-500' : 'bg-slate-300 dark:bg-slate-700'
-                  }`}
-                  aria-label={`Jump to stage ${i + 1}`}
+                  key={step.step}
+                  type="button"
+                  onClick={() => setActiveStepIndex(idx)}
+                  aria-label={`Jump to stage ${idx + 1}`}
+                  aria-current={idx === activeStepIndex ? 'step' : undefined}
+                  className={`
+                    h-2 rounded-full transition-all duration-200
+                    focus-visible:outline-none focus-visible:ring-2
+                    focus-visible:ring-sky-500 focus-visible:ring-offset-2
+                    ${
+                      idx === activeStepIndex
+                        ? 'w-6 bg-sky-600 dark:bg-sky-400'
+                        : 'w-2 bg-slate-400 hover:bg-sky-500 dark:bg-slate-700'
+                    }
+                  `}
                 />
               ))}
             </div>
 
             <button
-              onClick={() => setActiveStepIndex((prev) => (prev < approachSteps.length - 1 ? prev + 1 : 0))}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300"
+              type="button"
+              onClick={goToNextStep}
+              className="inline-flex items-center gap-1 text-xs font-bold text-sky-800 transition-colors hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300"
             >
               <span>Next Phase</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
