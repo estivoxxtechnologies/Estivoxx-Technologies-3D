@@ -2,6 +2,11 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { ProjectCaseStudy } from '../../types';
 
+import enterpriseImage from '../../assets/images/estivoxx_enterprise_platform_1791524466995.jpg';
+import cloudImage from '../../assets/images/estivoxx_cloud_infrastructure_1791524481696.jpg';
+import digitalImage from '../../assets/images/estivoxx_digital_experience_1791524497798.jpg';
+import automationImage from '../../assets/images/estivoxx_automation_systems_1791524509712.jpg';
+
 interface ProjectsSectionProps {
   onSelectProject: (project: ProjectCaseStudy) => void;
 }
@@ -13,7 +18,7 @@ export const projectsData: ProjectCaseStudy[] = [
     category: 'Enterprise Software & Core Architecture',
     summary:
       'Engineered a centralized multi-tenant operations platform aggregating legacy operational databases into unified real-time telemetry dashboards for executive decision makers.',
-    image: '/src/assets/images/estivoxx_enterprise_platform_1791524466995.jpg',
+    image: enterpriseImage,
     impact: 'Consolidated 6 legacy internal tools into a unified low-latency operations interface.',
     metrics: [
       { label: 'Latency Reduction', value: '-65%' },
@@ -34,7 +39,7 @@ export const projectsData: ProjectCaseStudy[] = [
     category: 'Cloud Engineering & Systems Reliability',
     summary:
       'Architected resilient microservice orchestration on Kubernetes with automated failover, distributed logging, and multi-region routing across distributed server nodes.',
-    image: '/src/assets/images/estivoxx_cloud_infrastructure_1791524481696.jpg',
+    image: cloudImage,
     impact: 'Eliminated single points of failure with automated self-healing container clusters.',
     metrics: [
       { label: 'Cold Start Latency', value: '<40ms' },
@@ -55,7 +60,7 @@ export const projectsData: ProjectCaseStudy[] = [
     category: 'Web Applications & Design Systems',
     summary:
       'Created an ultra-responsive client web portal combining rigorous WCAG AA accessibility, sub-second page loads, and a unified tokenized design system.',
-    image: '/src/assets/images/estivoxx_digital_experience_1791524497798.jpg',
+    image: digitalImage,
     impact: 'Increased client self-service adoption by +140% while cutting support load.',
     metrics: [
       { label: 'Lighthouse Score', value: '98 / 100' },
@@ -76,7 +81,7 @@ export const projectsData: ProjectCaseStudy[] = [
     category: 'Business Automation & Integration',
     summary:
       'Built an event-driven automation bridge linking inbound enterprise webhooks, invoice processing pipelines, and internal business logic without human intervention.',
-    image: '/src/assets/images/estivoxx_automation_systems_1791524509712.jpg',
+    image: automationImage,
     impact: 'Replaced manual spreadsheet coordination with audited deterministic event queues.',
     metrics: [
       { label: 'Hours Saved / Month', value: '280+ hrs' },
